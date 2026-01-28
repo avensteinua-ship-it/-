@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Next-Gen Python Web</title>
+    <link href="fonts.googleapis.com" rel="stylesheet">
+    <!-- Підключаємо іконки -->
+    <link rel="stylesheet" href="cdnjs.cloudflare.com">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #22d3ee;
+            --bg: #030712;
+            --card-bg: rgba(17, 24, 39, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        /* Фонова анімація */
+        .blob {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(40px);
+            animation: move 20s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-10%, -10%); }
+            to { transform: translate(100%, 100%); }
+        }
+
+        /* Контейнер */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        /* Hero секція */
+        header { padding: 120px 0 60px; text-align: center; }
+        .glitch {
+            font-size: 5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        /* Статистика (Лічильники) */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 50px 0;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .stat-item h2 { font-size: 2.5rem; color: var(--accent); }
+        .stat-item p { color: #94a3b8; font-size: 0.9rem; }
+
+        /* Секція скілів */
+        .skills-section { margin-bottom: 100px; }
+        .skill-bar {
+            background: rgba(255,255,255,0.05);
+            height: 10px;
+            border-radius: 5px;
+            margin: 15px 0 30px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            transition: width 2s ease-in-out;
+        }
+
+        /* Футер */
+        footer {
+            padding: 50px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+        .social-links a {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: 0.3s;
+        }
+        .social-links a:hover { color: var(--accent); transform: translateY(-5px); }
+
+        .btn-main {
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background: white;
+            color: black;
+            border-radius: 15px;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <div class="blob"></div>
+
+    <div class="container">
+        <header>
+            <div class="glitch">SMART PYTHON</div>
+            <p style="font-size: 1.4rem; color: #94a3b8; margin-bottom: 40px;">Автоматизація та веб-технології майбутнього</p>
+            <a href="#" class="btn-main" onclick="loadProgress()">Запустити систему</a>
+        </header>
+
+        <section class="stats">
+            <div class="stat-item">
+                <h2 class="count">250</h2>
+                <p>Проектів завершено</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="count">99</h2>
+                <p>Відсотків uptime</p>
+            </div>
+            <div class="stat-item">
+                <h2 class="count">15</h2>
+                <p>Країн світу</p>
+            </div>
+        </section>
+
+        <section class="skills-section">
+            <h3 style="margin-bottom: 20px;">Потужність системи:</h3>
+            <p>Python Backend (Flask/FastAPI)</p>
+            <div class="skill-bar"><div class="progress" id="p1"></div></div>
+            
+            <p>Frontend Design (HTML5/CSS3)</p>
+            <div class="skill-bar"><div class="progress" id="p2"></div></div>
+            
+            <p>AI Integration (2026 Ready)</p>
+            <div class="skill-bar"><div class="progress" id="p3"></div></div>
+        </section>
+
+        <footer>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p style="margin-top: 20px; color: #475569;">&copy; 2026 Developed by You. Powered by Python.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Анімація прогрес-барів
+        function loadProgress() {
+            document.getElementById('p1').style.width = '95%';
+            document.getElementById('p2').style.width = '85%';
+            document.getElementById('p3').style.width = '70%';
+            
+            // Ефект рахунку для цифр
+            const counts = document.querySelectorAll('.count');
+            counts.forEach(counter => {
+                const target = +counter.innerText;
+                let count = 0;
+                const updateCount = () => {
+                    if(count < target) {
+                        count++;
+                        counter.innerText = count + (target === 99 ? '%' : '+');
+                        setTimeout(updateCount, 20);
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Автоматичний запуск при завантаженні
+        window.onload = () => {
+            setTimeout(loadProgress, 500);
+        };
+    </script>
+</body>
+</html>
